@@ -25,7 +25,7 @@ def welcome(name=None):
 
 
 # Store Path
-abs_dir_path = r'C:\Users\Admin\PycharmProjects\helloWorld\tmp'
+abs_dir_path = ''
 
 
 # read and render file from user uploaded file or folder
