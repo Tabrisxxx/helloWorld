@@ -89,6 +89,7 @@ def list_files(req_path):
         return{
             'name': x.name,
             'fIcon': "bi bi-folder-fill" if op.isdir(x.path) else get_icons_for_file(x.name),
+            'relPath': os.path.relpath(x.path, abs_dir_path).replace("\\", "/"),
             'mTime': get_time_file(file_stat.st_mtime)
         }
 
