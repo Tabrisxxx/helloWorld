@@ -19,7 +19,7 @@
             <td></td>
             <td></td>
         </tr>
-        {% for fileObj in data['files'] %}
+        {% for fileObj in data['file_objs'] %}
         <tr>
             <td>
                 <a href="{{ url_for('list_files', reqPath=fileObj['relPath']) }}">
