@@ -43,8 +43,8 @@ def upload_file():
             if not op.exists(local_dirname):
                 os.mkdir(local_dirname)
 
-            #global abs_dir_path
-            #abs_dir_path = local_dirname
+            # global abs_dir_path
+            # abs_dir_path = local_dirname
 
             filename = op.join(upload_dirname, secure_filename(op.basename(file.filename)))
             file.save(op.join(app.config['UPLOAD_FOLDER'], filename))
@@ -96,8 +96,9 @@ def list_files(req_path):
             'mTime': get_time_file(file_stat.st_mtime)
         }
 
+    test_var = Path(abs_path).parents[0].as_posix()
     file_objs = [list_folder_content(x) for x in os.scandir(abs_path)]
-    parent_folder = op.relpath(Path(abs_path).parents[0], abs_dir_path).replace("\\", "/")
+    parent_folder = op.relpath(Path(abs_path).parents[0].as_posix(), Path(abs_path).as_posix())
     return render_template('files_list.html.j2', data={'files': file_objs, 'parentFolder': parent_folder})
 
 
