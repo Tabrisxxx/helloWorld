@@ -25,7 +25,7 @@ def welcome(name=None):
 
 
 # Store Path
-abs_dir_path = ''
+abs_dir_path = r'C:\Users\Admin\PycharmProjects\helloWorld\tmp'
 
 
 # read and render file from user uploaded file or folder
@@ -43,9 +43,12 @@ def upload_file():
             if not op.exists(local_dirname):
                 os.mkdir(local_dirname)
 
+            #global abs_dir_path
+            #abs_dir_path = local_dirname
+
             filename = op.join(upload_dirname, secure_filename(op.basename(file.filename)))
             file.save(op.join(app.config['UPLOAD_FOLDER'], filename))
-        return welcome()
+        return redirect(url_for('list_files'))
     return render_template('index.html')
 
 
@@ -95,7 +98,7 @@ def list_files(req_path):
 
     file_objs = [list_folder_content(x) for x in os.scandir(abs_path)]
     parent_folder = op.relpath(Path(abs_path).parents[0], abs_dir_path).replace("\\", "/")
-    return render_template('files_list.html', data={'files': file_objs, 'parentFolder': parent_folder})
+    return render_template('files_list.html.j2', data={'files': file_objs, 'parentFolder': parent_folder})
 
 
 if __name__ == '__main__':
